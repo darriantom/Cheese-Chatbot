@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "certifi": "^14.5.15"
+  }
+}
