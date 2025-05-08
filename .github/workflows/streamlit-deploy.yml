@@ -3,17 +3,17 @@ name: Streamlit Deploy
 on:
   push:
     branches:
-      - main
+      - main  # Replace with your branch name if different
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  # ✅ Linux environment (default for GitHub Actions)
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: 3.10
@@ -23,11 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Lint and test
+      - name: Verify chatbot.py exists
         run: |
-          echo "✅ You could run unit tests or linting here"
-        # Example: pytest
+          if [ ! -f "chatbot.py" ]; then
+            echo "❌ chatbot.py not found!"
+            exit 1
+          fi
 
-      # You don’t need to 'deploy' manually. Streamlit Cloud auto-pulls on push.
-      - name: Notify deploy complete
-        run: echo "✅ Code pushed — Streamlit Cloud will handle redeployment"
+      - name: Deployment handled by Streamlit Cloud
+        run: echo "🎉 Push complete. Streamlit Cloud will auto-deploy chatbot.py."
