@@ -271,7 +271,7 @@ if prompt:
                     ])
                     
                     answer = ask_gpt(prompt, context_text , st.session_state.previous_answer)
-                    st.session_state.previous_answer = st.session_state.previous_answer + "\n" + answer
+                    st.session_state.previous_answer = st.session_state.previous_answer + answer
                     # Display answer with custom styling\                    
                     st.markdown(f"<div class='assistant-message'>{answer}</div>", unsafe_allow_html=True)
                     
