@@ -91,7 +91,15 @@ with st.sidebar:
         - Prices and availability
         - Company information
         - Product details
+        
+        
     """)
+    if  st.button("🗑️ Clear Chat History", 
+                     help="Click to clear all chat history",
+                     type="secondary",
+                     use_container_width=True):
+            st.session_state.messages = []
+            st.rerun()
 
 # Main content area
 st.title("🧀 Cheese Explorer")
@@ -339,12 +347,7 @@ with col2:
         st.session_state.show_clear_confirmation = False
         
     if not st.session_state.show_clear_confirmation:
-        if st.button("🗑️ Clear Chat History", 
-                     help="Click to clear all chat history",
-                     type="secondary",
-                     use_container_width=True):
-            st.session_state.show_clear_confirmation = True
-            st.rerun()
+        
     else:
         st.warning("Are you sure you want to clear the chat history?")
         col_yes, col_no = st.columns(2)
