@@ -27,7 +27,7 @@ openai==1.78.0
 packaging==24.2
 pandas==2.2.3
 pillow==11.2.1
-pinecone-client==6.0.0
+pinecone==6.0.0
 pinecone-plugin-interface==0.0.7
 protobuf==6.30.2
 pyarrow==20.0.0
