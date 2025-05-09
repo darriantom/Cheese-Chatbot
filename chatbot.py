@@ -108,7 +108,7 @@ with st.sidebar:
 # Main content area
 st.title("          🧀 Cheese Explorer")
 st.markdown("       Ask me anything about cheeses from shop.kimelo.com!")
-st.markdown(
+st.markdown("--------------------------------")
 # Chat container with custom styling
 chat_container = st.container()
 
