@@ -233,7 +233,7 @@ def ask_gpt(question, context,previous_answer):
             Answer this answer is previous your answer:{previous_answer}
             User ask the question related to previous answer, You must answer the question based on previous answer and user question.
             User question: {question}
-            user ask <What is the most expensive cheese product?> and then answer about the cheese product which price is 197$
+            If user question is <What is the most expensive cheese product?> and then answer about the cheese product which price is 197$
             """
         # print(f"Prompt: {prompt}\n\n")
         response = client.chat.completions.create(
