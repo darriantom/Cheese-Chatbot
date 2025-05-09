@@ -90,7 +90,6 @@ try:
         index = pc.Index(index_name)
         # Verify index connection with a simple query
         index.describe_index_stats()
-        st.sidebar.success("✅ Connected to Pinecone!")
     except Exception as index_error:
         st.sidebar.error(f"❌ Pinecone Error: {str(index_error)}")
         st.stop()
@@ -146,7 +145,7 @@ def get_filter_from_llm(query):
         print(f"Error getting filter from LLM: {str(e)}")
         return None
 
-def search_pinecone(query, top_k=10):
+def search_pinecone(query, top_k=5):
     try:
         # Verify index is available
         if not index:
