@@ -206,7 +206,6 @@ def ask_gpt(question, context,previous_answer):
                         - URL where the product can be purchased (format as clickable link)
                         - SKU/UPC codes for reference
                         - Include image URLs in your response (format as markdown: ![Cheese Image](image_url)) 
-                            If possible, ensure the image is displayed at a width of 100px.
                         - Price information, weights, and packaging options
                         
                         2. CHEESE CHARACTERISTICS:
@@ -215,24 +214,13 @@ def ask_gpt(question, context,previous_answer):
                         - APPEARANCE: Describe the color, rind, interior, and visual aspects
                         - ORIGIN: Explain the geographical and cultural significance of this cheese
                         
-                        3. USAGE RECOMMENDATIONS:
-                        - CULINARY APPLICATIONS: Provide specific recipes and preparation methods
-                        - PAIRINGS: Suggest complementary foods, wines, beers, or other beverages
-                        - SERVING RECOMMENDATIONS: Discuss ideal temperature, cutting methods, presentation
-                        - STORAGE: Explain proper storage conditions and shelf life
-                        
-                        4. ADDITIONAL SHOPPING HELP:
-                        - RELATED PRODUCTS: Mention the related items from the context
-                        - SIMILAR RECOMMENDATIONS: List other products the customer might enjoy
-                        - PRICING CONSIDERATIONS: Discuss value and what affects quality/price
-                        
-                        Guidelines:
-                        • Format your response in a clean, organized way with clear sections and markdown formatting
-                        • Include ALL available product details (URLs, SKUs, images, pricing)
-                        • If showing multiple products, create a separate section for each with its own details
-                        • For images, include at least one image URL formatted as markdown if available
-                        • Include links to the product and related/similar products formatted as markdown
-                        • Be thorough but conversational, like an enthusiastic cheese expert sharing their passion
+                Guidelines:
+                • Format your response in a clean, organized way with clear sections and markdown formatting
+                • Include ALL available product details (URLs, SKUs, images, pricing)
+                • If showing multiple products, create a separate section for each with its own details
+                • For images, include at least one image URL formatted as markdown if available
+                • Include links to the product and related/similar products formatted as markdown
+                • Be thorough but conversational, like an enthusiastic cheese expert sharing their passion
             - If it's a general food-related question (not about cheese), give a common, non-political, non-character-based answer and generate image.
             - Use casual American English.
 
