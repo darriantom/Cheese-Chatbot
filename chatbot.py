@@ -307,8 +307,7 @@ if prompt:
                         for cheese in contexts
                     ])
                     
-                    answer = ask_gpt(prompt, context_text, previous_answer)
-                    previous_answer = previous_answer + answer
+                    answer = ask_gpt(prompt, context_text)
                     
                     # Display answer with custom styling
                     st.markdown(answer)
