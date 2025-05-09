@@ -248,7 +248,7 @@ def ask_gpt(question, context):
                         - URL where the product can be purchased (format as clickable link)
                         - SKU/UPC codes for reference
                         - Include image URLs in your response (format as markdown: ![Cheese Image](image_url)) 
-                            If possible, ensure the image is displayed at a width of 200px.
+                            If possible, ensure the image is displayed at a width of 100px.
                         - Price information, weights, and packaging options
                         
                         2. CHEESE CHARACTERISTICS:
