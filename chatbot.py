@@ -75,9 +75,8 @@ previous_answer = ""
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/000000/cheese.png", width=100)
     st.title("🧀 Cheese Bot")
-    st.markdown("---")
-
-    st.markdown("---")
+    
+    
     st.markdown("### 📚 About")
     st.markdown("""
         This chatbot helps you discover and learn about different types of cheeses.
@@ -342,8 +341,7 @@ if prompt:
                     # Add assistant response to chat history
                     st.session_state.messages.append({
                         "role": "assistant",
-                        "content": answer,
-                        "images": [cheese.get('image_path') for cheese in contexts if 'image_path' in cheese]
+                        "content": answer
                     })
                 else:
                     st.warning("No relevant cheese information found. Please try a different question.")
