@@ -57,6 +57,7 @@ with st.sidebar:
                      type="secondary",
                      use_container_width=True):
             st.session_state.messages = []
+            st.session_state.previous_answer = ""
             st.rerun()
     if  st.button("🗑️ Save Chat History", 
                      help="Click to save all chat history",
@@ -277,7 +278,7 @@ if prompt:
                     ])
                     
                     answer = ask_gpt(prompt, context_text , st.session_state.previous_answer)
-                    st.session_state.previous_answer = st.session_state.previous_answer + answer
+                    st.session_state.previous_answer = answer
                     # Display answer with custom styling\                    
                     st.markdown(f"<div class='assistant-message'>{answer}</div>", unsafe_allow_html=True)
                     
