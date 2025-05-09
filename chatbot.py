@@ -68,14 +68,13 @@ chat_container = st.container()
 # Display chat history in a beautiful way
 with chat_container:
     for message in st.session_state.messages:
-        with open('style.css') as f:
-            if message["role"] == "user":
-                with st.chat_message("user", avatar="🧑"):
-                    st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
-            else:
-                with st.chat_message("assistant", avatar="🧀"):
-                    st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<div class='assistant-message'>{message['content']}</div>", unsafe_allow_html=True)
+        if message["role"] == "user":
+            with st.chat_message("user", avatar="🧑"):
+                st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
+        else:
+            with st.chat_message("assistant", avatar="🧀"):
+                st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='assistant-message'>{message['content']}</div>", unsafe_allow_html=True)
 
 # Initialize OpenAI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
