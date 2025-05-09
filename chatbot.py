@@ -122,12 +122,15 @@ with chat_container:
                                     pass
 
 # Initialize OpenAI
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+assert OPENAI_API_KEY is not None, "OPENAI_API_KEY environment variable not set"
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Initialize Pinecone
 try:
-    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+    PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    assert PINECONE_API_KEY is not None, "PINECONE_API_KEY environment variable not set"
+    pc = Pinecone(api_key=PINECONE_API_KEY)
     index_name = "cheese-knowledge"
     try:
         index = pc.Index(index_name)
