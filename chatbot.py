@@ -73,7 +73,6 @@ with chat_container:
                 st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
         else:
             with st.chat_message("assistant", avatar="🧀"):
-                st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
                 st.markdown(f"<div class='assistant-message'>{message['content']}</div>", unsafe_allow_html=True)
 
 # Initialize OpenAI
