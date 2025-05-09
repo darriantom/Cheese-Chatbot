@@ -17,56 +17,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# Load CSS
+def load_css(css_file):
+    with open(css_file, "r") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-# Custom CSS for better styling
-st.markdown("""
-    <style>
-    .main {
-        padding: 0rem 1rem;
-        padding-bottom: 0px;  /* Add padding for fixed input */
-    }
-    .stButton button {
-        border-radius: 20px;
-        padding: 0.5rem 1rem;
-        font-weight: 500;
-    }
-    .chat-message {
-        width: 50%;
-        justify-content: center;  /* horizontal centering */
-        align-items: center; 
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-    .chat-message.user {
-        background-color: #e8f4f8;
-    }
-    .chat-message.assistant {
-        background-color: #f0f2f6;
-    }
-    .stMarkdown {
-        font-size: 1.1rem;
-    }
-    .stImage {
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    /* Fixed chat input styling */
-    .fixed-input {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 1rem;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-    }
-    /* Adjust main content to prevent overlap */
-    </style>
-""", unsafe_allow_html=True)
+# Load the CSS
+css_path = os.path.join(os.path.dirname(file), "style.css")
+load_css(css_path)
 
 # Initialize session state
 if "messages" not in st.session_state:
