@@ -74,9 +74,13 @@ previous_answer = ""
 # Sidebar for API Keys and Info
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/000000/cheese.png", width=100)
-    st.title("🧀 Cheese Bot")
+    st.title("""🧀 Cheese Bot
+             
+             
+             
+            """)
     
-    
+    st.markdown("---")
     st.markdown("### 📚 About")
     st.markdown("""
         This chatbot helps you discover and learn about different types of cheeses.
