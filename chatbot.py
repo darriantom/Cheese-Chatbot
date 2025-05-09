@@ -78,6 +78,8 @@ with st.sidebar:
              
              
              
+             
+             
             """)
     
     st.markdown("---")
@@ -107,22 +109,6 @@ with chat_container:
         else:
             with st.chat_message("assistant", avatar="🧀"):
                 st.markdown(message["content"])
-                if "images" in message and message["images"]:
-                    # Create a dynamic grid for images
-                    num_images = len(message["images"])
-                    cols = st.columns(min(3, num_images))
-                    for idx, img_path in enumerate(message["images"]):
-                        if img_path:
-                            col_idx = idx % 3
-                            with cols[col_idx]:
-                                try:
-                                    st.image(
-                                        img_path,
-                                        use_container_width=True,
-                                        caption=message.get("product_name", "")
-                                    )
-                                except:
-                                    pass
 
 # Initialize OpenAI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -326,21 +312,6 @@ if prompt:
                     
                     # Display answer with custom styling
                     st.markdown(answer)
-                    
-                    # Display cheese images in a dynamic grid
-                    cols = st.columns(min(3, len(contexts)))
-                    for idx, cheese in enumerate(contexts):
-                        col_idx = idx % 3
-                        with cols[col_idx]:
-                            if 'image_path' in cheese and cheese['image_path']:
-                                try:
-                                    st.image(
-                                        cheese['image_path'],
-                                        caption=cheese['product_name'],
-                                        use_container_width=True
-                                    )
-                                except Exception as img_error:
-                                    st.error(f"Could not load image for {cheese['product_name']}")
                     
                     # Add assistant response to chat history
                     st.session_state.messages.append({
