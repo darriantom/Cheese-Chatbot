@@ -102,8 +102,8 @@ with st.sidebar:
             st.rerun()
 
 # Main content area
-st.title("🧀 Cheese Explorer")
-st.markdown("Ask me anything about cheeses from shop.kimelo.com!")
+st.title("          🧀 Cheese Explorer")
+st.markdown("       Ask me anything about cheeses from shop.kimelo.com!")
 
 # Chat container with custom styling
 chat_container = st.container()
@@ -293,7 +293,16 @@ def ask_gpt(question, context,previous_answer):
 
 # Chat input at the bottom with fixed position
 # st.markdown('<div class="fixed-input">', unsafe_allow_html=True)
-prompt = st.chat_input("Ask a question about cheese...", key="chat_input")
+st.markdown("""
+    <style>
+        div[data-testid="chat-input"] textarea {
+            width: 300px !important;
+            min-width: 300px !important;
+            max-width: 300px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 st.markdown('</div>', unsafe_allow_html=True)
 
 if prompt:
