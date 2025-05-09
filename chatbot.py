@@ -279,7 +279,7 @@ if prompt:
                 if contexts:
                     context_text = "\n".join([
                         f"product_name: {cheese['product_name']}. company_name: {cheese['company_name']}. SKU: {cheese['SKU']}. UPC: {cheese['UPC']}. \
-                            price: {cheese['price']}. Cost per pound: {cheese['Cost per pound']}. Unit: {cheese['Unit']}. Weight: {cheese['weight(pound)']}. standard: {cheese['standard']}"
+                            price: {cheese['price']}. Cost per pound: {cheese['Cost per pound']}. Unit: {cheese['Unit']}. Weight: {cheese['weight(pound)']}. standard: {cheese['standard']}. image_url: {cheese['image_url']}"
                         for cheese in contexts
                     ])
                     

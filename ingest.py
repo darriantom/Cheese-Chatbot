@@ -96,7 +96,7 @@ def ingest():
                 # Create context string
                 context = f"product_name: {cheese['product_name']}. company_name: {cheese['company_name']}. \
                     Price: {cheese['price']}. Unit: {cheese['Unit']}. Cost per pound: {cheese['Cost per pound']}. \
-                        Standard: {cheese['standard']}. Weight: {cheese['weight(pound)']}. SKU: {cheese['SKU']}. UPC: {cheese['UPC']}."
+                        Standard: {cheese['standard']}. Weight: {cheese['weight(pound)']}. SKU: {cheese['SKU']}. UPC: {cheese['UPC']}. image_url: {cheese['image_url']}"
                 
                 # Get embedding
                 embedding = embed_text(context)
