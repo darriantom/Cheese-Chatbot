@@ -3,11 +3,12 @@ import json
 import streamlit as st
 from pinecone import Pinecone
 from openai import OpenAI
-# import openai
+from dotenv import load_dotenv
 import urllib3
 # Disable SSL warnings
 urllib3.disable_warnings()
 
+load_dotenv()
 # Initialize Streamlit page config with custom theme
 st.set_page_config(
     page_title="Cheese RAG Chatbot",
@@ -66,10 +67,6 @@ st.markdown("""
 # Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
-if "openai_api_key" not in st.session_state:
-    st.session_state.openai_api_key = ""
-if "pinecone_api_key" not in st.session_state:
-    st.session_state.pinecone_api_key = ""
 
 previous_answer = ""
 # os.environ['TRANSFORMERS_CACHE'] = '/tmp/huggingface_cache'
@@ -126,11 +123,11 @@ with chat_container:
 
 # Initialize OpenAI
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Initialize Pinecone
 try:
-    pc = Pinecone(api_key=st.secrets["PINECONE_API_KEY"])
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
     index_name = "cheese-knowledge"
     try:
         index = pc.Index(index_name)
@@ -171,7 +168,7 @@ def get_filter_from_llm(query):
             """
         
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
             temperature=0
         )
@@ -249,7 +246,7 @@ def ask_gpt(question, context , previous_answer):
             """
         print(f"Prompt: {prompt}\n\n")
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content
