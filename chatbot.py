@@ -243,6 +243,7 @@ def ask_gpt(question, context , previous_answer):
             - If it's a general food-related question (not about cheese), give a common, non-political, non-character-based answer and generate image.
             - Use casual American English.
             - If the question follows up on a previous answer, consider this: <{previous_answer}>.
+            - I wanna display the image of the cheese using the image_url on streamlilt cloud.
 
             User Question: "{question}"
             Answer:
