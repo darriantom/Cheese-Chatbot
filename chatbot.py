@@ -339,24 +339,3 @@ if prompt:
                     "content": error_message
                 })
 
-# Clear chat button with improved styling
-st.markdown("---")
-col1, col2, col3 = st.columns([1,2,1])
-with col2:
-    if "show_clear_confirmation" not in st.session_state:
-        st.session_state.show_clear_confirmation = False
-        
-    if not st.session_state.show_clear_confirmation:
-        
-    else:
-        st.warning("Are you sure you want to clear the chat history?")
-        col_yes, col_no = st.columns(2)
-        with col_yes:
-            if st.button("Yes, Clear All", type="primary", use_container_width=True):
-                st.session_state.messages = []
-                st.session_state.show_clear_confirmation = False
-                st.rerun()
-        with col_no:
-            if st.button("No, Keep History", type="secondary", use_container_width=True):
-                st.session_state.show_clear_confirmation = False
-                st.rerun()
