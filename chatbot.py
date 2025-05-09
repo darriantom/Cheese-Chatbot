@@ -229,9 +229,10 @@ def ask_gpt(question, context,previous_answer):
                 • Be thorough but conversational, like an enthusiastic cheese expert sharing their passion
             - If it's a general food-related question (not about cheese), give a common, non-political, non-character-based answer and generate image.
             - Use casual American English.
-
-            User Question: "{question}"
-            Answer:{previous_answer}
+            
+            Answer this answer is previous your answer:{previous_answer}
+            User ask the question related to previous answer, You must answer the question based on previous answer and user question.
+            User question: {question}
             """
         # print(f"Prompt: {prompt}\n\n")
         response = client.chat.completions.create(
