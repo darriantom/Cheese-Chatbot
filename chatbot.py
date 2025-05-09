@@ -30,6 +30,9 @@ st.markdown("""
         font-weight: 500;
     }
     .chat-message {
+        width: 50%;
+        justify-content: center;  /* horizontal centering */
+        align-items: center; 
         padding: 1.5rem;
         border-radius: 0.5rem;
         margin-bottom: 1rem;
@@ -37,10 +40,10 @@ st.markdown("""
         flex-direction: column;
     }
     .chat-message.user {
-        background-color: #f0f2f6;
+        background-color: #e8f4f8;
     }
     .chat-message.assistant {
-        background-color: #e8f4f8;
+        background-color: #f0f2f6;
     }
     .stMarkdown {
         font-size: 1.1rem;

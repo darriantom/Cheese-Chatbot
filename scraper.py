@@ -52,7 +52,6 @@ def scrape_links(url, index):
     weight = "N/A"
     image_url = "N/A"
     number1 = "N/A"
-    number2 = "N/A"
     try:
         driver = webdriver.Chrome(options=chrome_options)
         wait = WebDriverWait(driver, 3)
@@ -94,9 +93,6 @@ def scrape_links(url, index):
             if index == 6:
                 number1 = number
                 print(f"number1: {number1.text}")
-            elif index == 8:
-                number2 = number
-                print(f"number2: {number2.text}")
         # Create cheese entry
         cheese_entry = {
             "product_name": product_name,
@@ -107,15 +103,15 @@ def scrape_links(url, index):
             "standard": size,
             "weight(pound)": float(weight.split(' ')[0]),
             "SKU": int(number1.text),
-            "UPC": int(number2.text),
+            "UPC": int(number1.text),
             "image_url": image_url
         }
         print(f"cheese_entry: {cheese_entry}")
         # Download image in a separate thread
-        if image_url != "N/A":
-            with ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(download_image, image_url, product_name)
-                cheese_entry["image_path"] = future.result()
+        # if image_url != "N/A":
+        #     with ThreadPoolExecutor(max_workers=1) as executor:
+        #         future = executor.submit(download_image, image_url, product_name)
+        #         cheese_entry["image_path"] = future.result()
         
         cheeses.append(cheese_entry)
         print(f"Processed: {product_name}")
