@@ -279,7 +279,7 @@ def ask_gpt(question, context):
             - Use casual American English.
 
             User Question: "{question}"
-            Answer:
+            Answer:{previous_answer}
             """
         print(f"Prompt: {prompt}\n\n")
         response = client.chat.completions.create(
@@ -316,8 +316,8 @@ if prompt:
                         for cheese in contexts
                     ])
                     
-                    answer = ask_gpt(prompt, context_text)
-                    
+                    answer = ask_gpt(prompt, context_text , previous_answer)
+                    previous_answer = previous_answer + answer
                     # Display answer with custom styling
                     st.markdown(answer)
                     
