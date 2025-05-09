@@ -5,6 +5,7 @@ from pinecone import Pinecone
 from openai import OpenAI
 from dotenv import load_dotenv
 import urllib3
+import style.css
 # Disable SSL warnings
 urllib3.disable_warnings()
 
@@ -107,7 +108,7 @@ with st.sidebar:
 # Main content area
 st.title("          🧀 Cheese Explorer")
 st.markdown("       Ask me anything about cheeses from shop.kimelo.com!")
-
+st.markdown(
 # Chat container with custom styling
 chat_container = st.container()
 
@@ -116,10 +117,11 @@ with chat_container:
     for message in st.session_state.messages:
         if message["role"] == "user":
             with st.chat_message("user", avatar="🧑"):
-                st.markdown(message["content"])
+                st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
         else:
             with st.chat_message("assistant", avatar="🧀"):
-                st.markdown(message["content"])
+                st.markdown(f"<div class='user-message'>{message['content']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='assistant-message'>{message['content']}</div>", unsafe_allow_html=True)
 
 # Initialize OpenAI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
