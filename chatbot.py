@@ -5,7 +5,7 @@ from pinecone import Pinecone
 from openai import OpenAI
 from dotenv import load_dotenv
 import urllib3
-import style.css
+
 # Disable SSL warnings
 urllib3.disable_warnings()
 
@@ -64,6 +64,7 @@ st.markdown("""
         box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     /* Adjust main content to prevent overlap */
     </style>
 """, unsafe_allow_html=True)
