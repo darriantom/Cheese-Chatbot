@@ -24,7 +24,7 @@ def load_css(css_file):
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 # Load the CSS
-css_path = os.path.join(os.path.dirname(file), "style.css")
+css_path = os.path.join(os.path.dirname(__file__), "style.css")
 load_css(css_path)
 
 # Initialize session state
@@ -37,13 +37,7 @@ previous_answer = ""
 # Sidebar for API Keys and Info
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/000000/cheese.png", width=100)
-    st.title("""🧀 Cheese Bot
-             
-             
-             
-             
-             
-            """)
+    st.title("""🧀 Cheese Bot\n\n""")
     
     st.markdown("---")
     st.markdown("### 📚 About")
