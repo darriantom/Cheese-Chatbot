@@ -222,7 +222,7 @@ def search_pinecone(query, top_k=10):
         st.error(f"Error in search_pinecone: {str(e)}")
         return []
 
-def ask_gpt(question, context , previous_answer):
+def ask_gpt(question, context):
     try:
         prompt = f"""
             When a user asks a question, do the following:
