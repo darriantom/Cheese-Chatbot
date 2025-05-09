@@ -125,9 +125,10 @@ def get_filter_from_llm(query):
 
             Examples:
             - "Show me cheeses under $20" → {{"price": {{"$lt": 20}}}}
+            - "What is the most expensive cheese product?" → {{"price": {{"$gt": 190}}}}
             - "Cheeses by Tillamook" → {{"company_name": {{"$eq": "Tillamook"}}}}
             - "Show me cheeses under 5 pounds" → {{"weight(pound)": {{"$lt": 5}}}}
-
+            - "What is the cheapest cheese?" → {{"price": {{"$lt": 30}}}}
             Query: {query}
             """
         
