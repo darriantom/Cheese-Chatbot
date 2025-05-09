@@ -231,7 +231,7 @@ def ask_gpt(question, context,previous_answer):
             - Use casual American English.
             
             Answer this answer is previous your answer:{previous_answer}
-            User ask the question related to previous answer, You must answer the question based on previous answer and user question.
+            If user ask the question related to previous answer, You must answer the question based on previous answer and user question.
             User question: {question}
             """
         # print(f"Prompt: {prompt}\n\n")
