@@ -302,7 +302,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
+prompt = st.chat_input("Ask a question about cheese...", key="chat_input")
 st.markdown('</div>', unsafe_allow_html=True)
 
 if prompt:
