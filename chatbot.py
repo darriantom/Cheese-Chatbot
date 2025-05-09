@@ -31,7 +31,8 @@ load_css(css_path)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-previous_answer = ""
+if "previous_answer" not in st.session_state:  # Add this initialization
+    st.session_state.previous_answer = ""
 # os.environ['TRANSFORMERS_CACHE'] = '/tmp/huggingface_cache'
 
 # Sidebar for API Keys and Info
@@ -269,8 +270,8 @@ if prompt:
                         for cheese in contexts
                     ])
                     
-                    answer = ask_gpt(prompt, context_text , previous_answer)
-                    previous_answer = previous_answer + answer
+                    answer = ask_gpt(prompt, context_text , st.session_state.previous_answer)
+                    st.session_state.previous_answer = st.session_state.previous_answer + "\n" + answer
                     # Display answer with custom styling\                    
                     st.markdown(f"<div class='assistant-message'>{answer}</div>", unsafe_allow_html=True)
                     
