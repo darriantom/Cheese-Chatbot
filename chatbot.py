@@ -79,9 +79,6 @@ with st.sidebar:
     st.image("https://img.icons8.com/color/96/000000/cheese.png", width=100)
     st.title("🧀 Cheese Bot")
     st.markdown("---")
-    
-    st.session_state.openai_api_key = st.secrets["OPENAI_API_KEY"]
-    st.session_state.pinecone_api_key = st.secrets["PINECONE_API_KEY"]
 
     st.markdown("---")
     st.markdown("### 📚 About")
@@ -128,32 +125,27 @@ with chat_container:
                                     pass
 
 # Initialize OpenAI
-client = OpenAI(api_key=st.session_state.openai_api_key)
+
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Initialize Pinecone
 try:
-    if st.session_state.pinecone_api_key:
-        pc = Pinecone(api_key=st.session_state.pinecone_api_key)
-        index_name = "cheese-knowledge"
-        try:
-            index = pc.Index(index_name)
-            # Verify index connection with a simple query
-            index.describe_index_stats()
-            st.sidebar.success("✅ Connected to Pinecone!")
-        except Exception as index_error:
-            st.sidebar.error(f"❌ Pinecone Error: {str(index_error)}")
-            st.stop()
-    else:
-        st.sidebar.warning("⚠️ Please enter your Pinecone API key")
+    pc = Pinecone(api_key=st.secrets["PINECONE_API_KEY"])
+    index_name = "cheese-knowledge"
+    try:
+        index = pc.Index(index_name)
+        # Verify index connection with a simple query
+        index.describe_index_stats()
+        st.sidebar.success("✅ Connected to Pinecone!")
+    except Exception as index_error:
+        st.sidebar.error(f"❌ Pinecone Error: {str(index_error)}")
+        st.stop()
 except Exception as e:
     st.sidebar.error(f"❌ Connection Error: {str(e)}")
     st.stop()
 
 def embed_text(text):
     try:
-        if not st.session_state.openai_api_key:
-            st.error("Please enter your OpenAI API key to continue.")
-            return None
         response = client.embeddings.create(
             input=[text],
             model="text-embedding-3-small"
@@ -271,68 +263,65 @@ prompt = st.chat_input("Ask a question about cheese...", key="chat_input")
 st.markdown('</div>', unsafe_allow_html=True)
 
 if prompt:
-    if not st.session_state.openai_api_key or not st.session_state.pinecone_api_key:
-        st.error("Please enter both API keys in the sidebar to continue.")
-    else:
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        
-        # Display user message
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        
-        # Get and display assistant response
-        with st.chat_message("assistant"):
-            with st.spinner("🧀 Thinking..."):
-                try:
-                    contexts = search_pinecone(prompt)
-                    if contexts:
-                        context_text = "\n".join([
-                            f"product_name: {cheese['product_name']}. company_name: {cheese['company_name']}. SKU: {cheese['SKU']}. UPC: {cheese['UPC']}. \
-                                price: {cheese['price']}. Cost per pound: {cheese['Cost per pound']}. Unit: {cheese['Unit']}. Weight: {cheese['weight(pound)']}. standard: {cheese['standard']}"
-                            for cheese in contexts
-                        ])
-                        
-                        answer = ask_gpt(prompt, context_text, previous_answer)
-                        previous_answer = previous_answer + answer
-                        
-                        # Display answer with custom styling
-                        st.markdown(answer)
-                        
-                        # Display cheese images in a dynamic grid
-                        cols = st.columns(min(3, len(contexts)))
-                        for idx, cheese in enumerate(contexts):
-                            col_idx = idx % 3
-                            with cols[col_idx]:
-                                if 'image_path' in cheese and cheese['image_path']:
-                                    try:
-                                        st.image(
-                                            cheese['image_path'],
-                                            caption=cheese['product_name'],
-                                            use_container_width=True
-                                        )
-                                    except Exception as img_error:
-                                        st.error(f"Could not load image for {cheese['product_name']}")
-                        
-                        # Add assistant response to chat history
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": answer,
-                            "images": [cheese.get('image_path') for cheese in contexts if 'image_path' in cheese]
-                        })
-                    else:
-                        st.warning("No relevant cheese information found. Please try a different question.")
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": "No relevant cheese information found. Please try a different question."
-                        })
-                except Exception as e:
-                    error_message = f"An error occurred: {str(e)}"
-                    st.error(error_message)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    
+    # Display user message
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    # Get and display assistant response
+    with st.chat_message("assistant"):
+        with st.spinner("🧀 Thinking..."):
+            try:
+                contexts = search_pinecone(prompt)
+                if contexts:
+                    context_text = "\n".join([
+                        f"product_name: {cheese['product_name']}. company_name: {cheese['company_name']}. SKU: {cheese['SKU']}. UPC: {cheese['UPC']}. \
+                            price: {cheese['price']}. Cost per pound: {cheese['Cost per pound']}. Unit: {cheese['Unit']}. Weight: {cheese['weight(pound)']}. standard: {cheese['standard']}"
+                        for cheese in contexts
+                    ])
+                    
+                    answer = ask_gpt(prompt, context_text, previous_answer)
+                    previous_answer = previous_answer + answer
+                    
+                    # Display answer with custom styling
+                    st.markdown(answer)
+                    
+                    # Display cheese images in a dynamic grid
+                    cols = st.columns(min(3, len(contexts)))
+                    for idx, cheese in enumerate(contexts):
+                        col_idx = idx % 3
+                        with cols[col_idx]:
+                            if 'image_path' in cheese and cheese['image_path']:
+                                try:
+                                    st.image(
+                                        cheese['image_path'],
+                                        caption=cheese['product_name'],
+                                        use_container_width=True
+                                    )
+                                except Exception as img_error:
+                                    st.error(f"Could not load image for {cheese['product_name']}")
+                    
+                    # Add assistant response to chat history
                     st.session_state.messages.append({
                         "role": "assistant",
-                        "content": error_message
+                        "content": answer,
+                        "images": [cheese.get('image_path') for cheese in contexts if 'image_path' in cheese]
                     })
+                else:
+                    st.warning("No relevant cheese information found. Please try a different question.")
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": "No relevant cheese information found. Please try a different question."
+                    })
+            except Exception as e:
+                error_message = f"An error occurred: {str(e)}"
+                st.error(error_message)
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": error_message
+                })
 
 # Clear chat button with improved styling
 st.markdown("---")
