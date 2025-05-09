@@ -80,20 +80,9 @@ with st.sidebar:
     st.title("🧀 Cheese Bot")
     st.markdown("---")
     
-    with st.expander("🔑 API Configuration", expanded=True):
-        st.session_state.openai_api_key = st.text_input(
-            "OpenAI API Key",
-            type="password",
-            value=st.session_state.openai_api_key,
-            help="Enter your OpenAI API key"
-        )
-        st.session_state.pinecone_api_key = st.text_input(
-            "Pinecone API Key",
-            type="password",
-            value=st.session_state.pinecone_api_key,
-            help="Enter your Pinecone API key"
-        )
-    
+    st.session_state.openai_api_key = st.secrets["OPENAI_API_KEY"]
+    st.session_state.pinecone_api_key = st.secrets["PINECONE_API_KEY"]
+
     st.markdown("---")
     st.markdown("### 📚 About")
     st.markdown("""
