@@ -153,7 +153,7 @@ def get_filter_from_llm(query):
         print(f"Error getting filter from LLM: {str(e)}")
         return None
 
-def search_pinecone(query, top_k=90):
+def search_pinecone(query, top_k=40):
     try:
         # Verify index is available
         if not index:
