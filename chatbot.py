@@ -65,7 +65,14 @@ with st.sidebar:
     #                  use_container_width=True):
     #     with open("chat_history.txt", "w", encoding="utf-8") as f:
     #         f.write(st.session_state.messages)
-
+    st.download_button(
+        label="📥 Download Chat History",
+        data=st.session_state.messages,
+        file_name="cheese_chat_history.txt",
+        mime="text/plain",
+        help="Download the conversation as a text file",
+        use_container_width=True,
+    )
 # Main content area
 st.title("          🧀 Cheese Explorer")
 st.markdown("       Ask me anything about cheeses from shop.kimelo.com!")
