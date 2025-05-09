@@ -63,8 +63,8 @@ with st.sidebar:
                      help="Click to save all chat history",
                      type="primary",
                      use_container_width=True):
-        with open("chat_history.json", "w") as f:
-            json.dump(st.session_state.messages, f)
+        with open("chat_history.txt", "w", encoding="utf-8") as f:
+            f.write(st.session_state.messages)
 
 # Main content area
 st.title("          🧀 Cheese Explorer")
@@ -177,7 +177,7 @@ def search_pinecone(query, top_k=5):
         # Add filter if available and valid
         if filter_dict and isinstance(filter_dict, dict):
             query_params["filter"] = filter_dict
-            print(f"Using filter: {filter_dict}")
+            # print(f"Using filter: {filter_dict}")
             
         try:
             # Execute query
@@ -233,7 +233,7 @@ def ask_gpt(question, context,previous_answer):
             User Question: "{question}"
             Answer:{previous_answer}
             """
-        print(f"Prompt: {prompt}\n\n")
+        # print(f"Prompt: {prompt}\n\n")
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[{"role": "user", "content": prompt}]
