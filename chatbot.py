@@ -58,6 +58,12 @@ with st.sidebar:
                      use_container_width=True):
             st.session_state.messages = []
             st.rerun()
+    if  st.button("🗑️ Save Chat History", 
+                     help="Click to save all chat history",
+                     type="primary",
+                     use_container_width=True):
+        with open("chat_history.json", "w") as f:
+            json.dump(st.session_state.messages, f)
 
 # Main content area
 st.title("          🧀 Cheese Explorer")
