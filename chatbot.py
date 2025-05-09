@@ -59,12 +59,12 @@ with st.sidebar:
             st.session_state.messages = []
             st.session_state.previous_answer = ""
             st.rerun()
-    if  st.button("🗑️ Save Chat History", 
-                     help="Click to save all chat history",
-                     type="primary",
-                     use_container_width=True):
-        with open("chat_history.txt", "w", encoding="utf-8") as f:
-            f.write(st.session_state.messages)
+    # if  st.button("🗑️ Save Chat History", 
+    #                  help="Click to save all chat history",
+    #                  type="primary",
+    #                  use_container_width=True):
+    #     with open("chat_history.txt", "w", encoding="utf-8") as f:
+    #         f.write(st.session_state.messages)
 
 # Main content area
 st.title("          🧀 Cheese Explorer")
